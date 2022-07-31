@@ -17,11 +17,13 @@ public class Main {
         }
 
         // Task 2
-//        printArrays(nums1, nums2);
+        printArrays(nums1, nums2);
         // Task 3
 //        highestTriple(nums1);
         // Task 4
-        distinctArr(nums1, nums2);
+        ArrayList<Integer> dist = distinctArr(nums1, nums2);
+        // Task 5
+        System.out.println(dist);
 
     }
 
@@ -94,7 +96,7 @@ public class Main {
     }
 
     // Task 4
-    public static void distinctArr(ArrayList<Integer> nums1, ArrayList<Integer> nums2) {
+    public static ArrayList<Integer> distinctArr(ArrayList<Integer> nums1, ArrayList<Integer> nums2) {
 
         // Builds the distinct array
         ArrayList<Integer> dist = new ArrayList<>();
@@ -103,21 +105,23 @@ public class Main {
         }
 
         // Compares nums1 to nums2 and finds special numbers
-        for (Integer num: nums1) {
-            if(isUnique(num, nums2))
+        for (Integer num : nums1) {
+            if (isUnique(num, nums2))
                 addToDist(dist, num);
         }
 
         // Compares nums2 to nums1 and finds special numbers
-        for (Integer num: nums2) {
-            if(isUnique(num, nums1))
+        for (Integer num : nums2) {
+            if (isUnique(num, nums1))
                 addToDist(dist, num);
         }
 
-        System.out.println(dist);
+        return dist;
     }
 
-    // Adds a number to the array and removes the last -1. @returns true if added, @returns false if not.
+    /*
+     *  Adds a number to the array and removes the last -1. @returns true if added, @returns false if not.
+     * */
     @SuppressWarnings("UnusedReturnValue") // Returns boolean if needed
     private static boolean addToDist(ArrayList<Integer> dist, int num) {
 
@@ -138,10 +142,12 @@ public class Main {
 
     }
 
-    // Checks if a number is unique to the other array. @returns true if unique, @returns false if not.
+    /*
+     * Checks if a number is unique to the other array. @returns true if unique, @returns false if not.
+     * */
     private static boolean isUnique(int num, ArrayList<Integer> nums) {
 
-        for (Integer arrNum: nums) {
+        for (Integer arrNum : nums) {
             if (num == arrNum)
                 return false;
         }
