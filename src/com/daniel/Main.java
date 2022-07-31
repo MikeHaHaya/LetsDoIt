@@ -19,7 +19,7 @@ public class Main {
         // Task 2
         printArrays(nums1, nums2);
         // Task 3
-//        highestTriple(nums1);
+        highestTriple(nums1);
         // Task 4
         ArrayList<Integer> dist = distinctArr(nums1, nums2);
         // Task 5
@@ -106,13 +106,13 @@ public class Main {
 
         // Compares nums1 to nums2 and finds special numbers
         for (Integer num : nums1) {
-            if (isUnique(num, nums2))
+            if (isUnique(num, nums2, dist))
                 addToDist(dist, num);
         }
 
         // Compares nums2 to nums1 and finds special numbers
         for (Integer num : nums2) {
-            if (isUnique(num, nums1))
+            if (isUnique(num, nums1, dist))
                 addToDist(dist, num);
         }
 
@@ -129,7 +129,7 @@ public class Main {
 
             for (int i = 0; true; i++)
 
-                if (dist.get(i) != -1) {
+                if (dist.get(i) == -1) {
                     dist.remove(i);
                     dist.add(i, num);
                     return true;
@@ -143,14 +143,22 @@ public class Main {
     }
 
     /*
-     * Checks if a number is unique to the other array. @returns true if unique, @returns false if not.
+     * Checks if a number is unique to the other array and does not exist already in the distinct array.
+     * @returns true if unique, @returns false if not.
      * */
-    private static boolean isUnique(int num, ArrayList<Integer> nums) {
+    private static boolean isUnique(int num, ArrayList<Integer> nums, ArrayList<Integer> dist) {
 
-        for (Integer arrNum : nums) {
-            if (num == arrNum)
-                return false;
+        if (!dist.contains(num)) {
+
+            for (Integer arrNum : nums) {
+                if (num == arrNum) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
         }
-        return true;
+
     }
 }
